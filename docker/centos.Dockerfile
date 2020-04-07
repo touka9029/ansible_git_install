@@ -1,6 +1,7 @@
 FROM centos:centos7.7.1908
 
 RUN yum update -y \
+  && yum install -y epel-release \
   && yum install -y \
     ansible \
     sudo
