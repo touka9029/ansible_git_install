@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  centos:
+    build:
+      context: ./docker
+      dockerfile: ./centos.Dockerfile
+    image: centos7:ansible-latest
+    volumes:
+      - ./ansible:/tmp/ansible
