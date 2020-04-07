@@ -10,4 +10,7 @@ RUN yum update -y \
 # USER centos
 # WORKDIR /home/centos
 
+VOLUME /tmp/ansible
+WORKDIR /tmp/ansible
+
 CMD [ "tail", "-f", "/dev/null" ]
