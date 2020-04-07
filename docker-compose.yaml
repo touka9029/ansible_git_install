@@ -6,5 +6,6 @@ services:
       context: ./docker
       dockerfile: ./centos.Dockerfile
     image: centos7:ansible-latest
+    container_name: ansible_test
     volumes:
       - ./ansible:/tmp/ansible
