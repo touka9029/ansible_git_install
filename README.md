@@ -3,7 +3,7 @@
 # コンテナ起動
 $ docker-compose up -d --build
 
-# コンテナに対してansible-playbookを実行
+# コンテナ内でansible-playbookを実行
 $ docker exec -it ansible_test ansible-playbook developer_setup.yml
 ```
 
