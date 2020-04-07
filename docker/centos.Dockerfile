@@ -6,12 +6,12 @@ RUN yum update -y \
     ansible \
     sudo
 
-# sudoのパスワード設定が面倒なので保留
-# RUN useradd -u 1000 centos
-# USER centos
-# WORKDIR /home/centos
+# centosユーザを作ってパスワード無しでsudo可能にする
+RUN useradd -u 1000 centos \
+  && echo "centos ALL=NOPASSWD: ALL" >> /etc/sudoers
+USER centos
+WORKDIR /home/centos
 
-VOLUME /tmp/ansible
-WORKDIR /tmp/ansible
+VOLUME /home/centos/ansible
 
 CMD [ "tail", "-f", "/dev/null" ]

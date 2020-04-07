@@ -8,4 +8,4 @@ services:
     image: centos7:ansible-latest
     container_name: ansible_test
     volumes:
-      - ./ansible:/tmp/ansible
+      - ./ansible:/home/centos/ansible
