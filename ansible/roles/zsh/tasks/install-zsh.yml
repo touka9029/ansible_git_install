@@ -1,0 +1,34 @@
+---
+- name: Install required packages.
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - ncurses-devel
+      - gcc
+  become: yes
+
+- name: Get git package.
+  unarchive:
+    src: "https://sourceforge.net/projects/zsh/files/zsh/{{ zsh_version }}/zsh-{{ zsh_version }}.tar.xz/download"
+    dest: "{{ dest_dir }}"
+    remote_src: yes
+  become: yes
+
+- name: Install zsh.
+  shell: |
+    cd {{ dest_dir }}/zsh-{{ zsh_version }}
+    ./configure --enable-multibyte
+    make && make install
+  become: yes
+
+- name: Set zsh to shells.
+  lineinfile:
+    path: /etc/shells
+    insertafter: "/usr/bin/bash"
+    line: /usr/local/bin/zsh
+  become: yes
+
+- name: Set default shell.
+  shell: chsh -s /usr/local/bin/zsh
+  become: yes

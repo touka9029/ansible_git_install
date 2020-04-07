@@ -2,5 +2,7 @@
   connection: local
   gather_facts: false
   roles:
+    - name: zsh
+      tags: zsh
     - name: git
       tags: git
