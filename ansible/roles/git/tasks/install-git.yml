@@ -1,0 +1,32 @@
+---
+- name: Install required packages.
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      # required build packages: https://qiita.com/tomy0610/items/66e292f80aa1adc1161d
+      - gcc
+      - curl-devel
+      - expat-devel
+      - gettext-devel
+      - openssl-devel
+      - zlib-devel
+      - perl-ExtUtils-MakeMaker
+      - autoconf
+      # required unarchive
+      - unzip
+  become: yes
+
+- name: Get git package.
+  unarchive:
+    src: "https://github.com/git/git/archive/v{{ git_version }}.zip"
+    dest: "{{ dest_dir }}"
+    remote_src: yes
+  become: yes
+
+- name: Install git.
+  shell: |
+    cd {{ dest_dir }}/git-{{ git_version }}
+    make prefix=/usr/local all
+    make prefix=/usr/local install
+  become: yes
