@@ -1,2 +1,14 @@
 ---
 - include_tasks: "install-git.yml"
+
+- name: Installed git version.
+  shell: "git --version"
+  register: debug_git_version
+
+- name: Debug git version.
+  debug:
+    msg: "{{ debug_git_version.stdout }}"
+
+- include_tasks: "uninstall-git.yml"
+  vars:
+    temp_dir: "/tmp/git_uninstall"
